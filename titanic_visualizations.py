@@ -69,7 +69,7 @@ def survival_stats(data, outcomes, key, filters = []):
     all_data = all_data[[key, 'Survived']]
     
     # Create plotting figure
-    plt.figure(figsize=(8,6))
+    plt.figure(figsize=(6,4))
 
     # 'Numerical' features
     if(key == 'Age' or key == 'Fare'):
@@ -91,14 +91,14 @@ def survival_stats(data, outcomes, key, filters = []):
         # Overlay each bin's survival rates
         nonsurv_vals = all_data[all_data['Survived'] == 0][key].reset_index(drop = True)
         surv_vals = all_data[all_data['Survived'] == 1][key].reset_index(drop = True)
-        plt.hist(nonsurv_vals, bins = bins, alpha = 0.6,
+        plt.hist(nonsurv_vals, bins = bins,
                  color = 'red', label = 'Did not survive')
-        plt.hist(surv_vals, bins = bins, alpha = 0.6,
+        plt.hist(surv_vals, bins = bins,
                  color = 'green', label = 'Survived')
     
         # Add legend to plot
         plt.xlim(0, bins.max())
-        plt.legend(framealpha = 0.8)
+        plt.legend(framealpha = 1.0)
     
     # 'Categorical' features
     else:
@@ -129,7 +129,7 @@ def survival_stats(data, outcomes, key, filters = []):
             surv_bar = plt.bar(i, frame.loc[i]['Survived'], width = bar_width, color = 'g')
 
             plt.xticks(np.arange(len(frame)), values)
-            plt.legend((nonsurv_bar[0], surv_bar[0]),('Did not survive', 'Survived'), framealpha = 0.8)
+            plt.legend((nonsurv_bar[0], surv_bar[0]),('Did not survive', 'Survived'), framealpha = 1)
 
     # Common attributes for plot formatting
     plt.xlabel(key)
